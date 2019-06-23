@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * Organization richsnippets template
+ *
+ * @var $block \Nakrani\Richsnippets\Block\Richsnippets\Organization
+ */
+
+$url = $block->getStoreUrl();
+$organizationName = $this->helper('Nakrani\Richsnippets\Helper\Data')->getConfig('richsnippets/general/name');
+$telephone = $this->helper('Nakrani\Richsnippets\Helper\Data')->getConfig('richsnippets/general/telephone');
+$contactType = $this->helper('Nakrani\Richsnippets\Helper\Data')->getConfig('richsnippets/general/contacttype');
+$contactOption = $this->helper('Nakrani\Richsnippets\Helper\Data')->getConfig('richsnippets/general/contactoption');
+$areaServed = $this->helper('Nakrani\Richsnippets\Helper\Data')->getConfig('richsnippets/general/areaserved');
+if ($contactOption == 'tollfree') {
+  $contactOptions = 'TollFree';
+} else {
+  $contactOptions = 'HearingImpairedSupported';
+}
+?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "url": "<?php echo $block->escapeHtml($url); ?>",
+  "name": "<?php echo $block->escapeHtml($organizationName); ?>",
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+1-<?php echo $block->escapeHtml($telephone); ?>",
+    "contactType": "<?php echo $block->escapeHtml($contactType); ?>",
+    "contactOption": "<?php echo $block->escapeHtml($contactOption); ?>",
+     "areaServed": "<?php echo $block->escapeHtml($areaServed); ?>"
+  }]
+}
+</script>

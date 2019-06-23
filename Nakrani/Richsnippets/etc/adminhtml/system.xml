@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="nakrani" translate="label" sortOrder="10">
+            <label>Nakrani</label>
+        </tab>
+        <section id="richsnippets" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Richsnippets</label>
+            <tab>nakrani</tab>
+            <resource>Nakrani_Richsnippets::richsnippets_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enableproductsnippets" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Product Richsnippets</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This will enable product richsnippets for product detail page</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                 <field id="enableorganizationsnippets" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Organization Snippets</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This will enable organization richsnippets for all page</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="name" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Name of Organization</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enableorganizationsnippets">1</field>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="telephone" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Telephone</label>
+                    <validate>required-entry validate-length minimum-length-10 maximum-length-10 validate-digits</validate>
+                    <depends>
+                        <field id="enableorganizationsnippets">1</field>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="contacttype" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label>Contact Type</label>        
+                   <source_model>Nakrani\Richsnippets\Model\Config\Source\ContactType</source_model>
+                   <depends>
+                        <field id="enableorganizationsnippets">1</field>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="contactoption" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label>Contact Option</label>        
+                   <source_model>Nakrani\Richsnippets\Model\Config\Source\ContactOption</source_model>
+                   <depends>
+                        <field id="enableorganizationsnippets">1</field>
+                        <field id="enable">1</field>
+                    </depends>
+                    <comment>Details about the phone number</comment>
+                </field>
+                <field id="areaserved" translate="Module" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AreaServed</label>
+                    <comment>The geographical region served by the number, specified as a AdministrativeArea. Countries may be specified concisely using just their standard ISO-3166 two-letter code like 'US'.</comment>
+                    <depends>
+                        <field id="enableorganizationsnippets">1</field>
+                        <field id="enable">1</field>
+                    </depends>
+                    <validate>required-entry letters-only validate-length minimum-length-2 maximum-length-2</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
